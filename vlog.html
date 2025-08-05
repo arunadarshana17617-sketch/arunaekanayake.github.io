@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Interactive Blog Space</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: {
+              50: '#f0f9ff',
+              100: '#e0f2fe',
+              200: '#bae6fd',
+              300: '#7dd3fc',
+              400: '#38bdf8',
+              500: '#0ea5e9',
+              600: '#0284c7',
+              700: '#0369a1',
+              800: '#075985',
+              900: '#0c4a6e',
+            },
+          },
+          fontFamily: {
+            sans: ['Inter', 'ui-sans-serif', 'system-ui'],
+            display: ['Poppins', 'ui-sans-serif', 'system-ui'],
+          },
+        }
+      }
+    }
+  </script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap');
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #ffffff;
+      color: #374151;
+      overflow-x: hidden;
+    }
+    
+    #threejs-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      opacity: 0.05;
+    }
+    
+    .gradient-text {
+      background: linear-gradient(90deg, #0ea5e9, #6366f1);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f3f4f6;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #d1d5db;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #9ca3af;
+    }
+    
+    .blog-card {
+      transition: all 0.3s ease;
+      transform-style: preserve-3d;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    }
+    .blog-card:hover {
+      transform: translateY(-5px) scale(1.01);
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    }
+    
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+    .featured-card {
+      animation: float 6s ease-in-out infinite;
+    }
+    
+    #particle-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: -1;
+    }
+    
+    .line-clamp-3 {
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+  </style>
+</head>
+
+<nav class="bg-white/80 backdrop-blur-sm shadow-sm sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between h-16">
+        <div class="flex items-center">
+          <a href="#" class="text-xl font-display font-bold gradient-text flex items-center">
+            <svg class="w-6 h-6 mr-2" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="url(#gradient)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M12 8V16" stroke="url(#gradient)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M8 12H16" stroke="url(#gradient)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <defs>
+                <linearGradient id="gradient" x1="2" y1="2" x2="22" y2="22" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#0ea5e9"/>
+                  <stop offset="1" stop-color="#6366f1"/>
+                </linearGradient>
+              </defs>
+            </svg>
+            Aruna Ekanayake
+          </a>
+        </div>
+        <div class="hidden md:flex items-center space-x-8">
+          <a href="index.html" class="text-dark dark:text-light hover:text-primary-600 dark:hover:text-primary-400 font-medium underline-animation">Home</a>
+         <a href="index.html#about" class="text-dark dark:text-light hover:text-primary-600 dark:hover:text-primary-400 font-medium underline-animation">About</a>
+          <a href="index.html#skills" class="text-dark dark:text-light hover:text-primary-600 dark:hover:text-primary-400 font-medium underline-animation">Skills</a>
+          <a href="index.html#projects" class="text-dark dark:text-light hover:text-primary-600 dark:hover:text-primary-400 font-medium underline-animation">Projects</a>
+          <a href="index.html#experience" class="text-dark dark:text-light hover:text-primary-600 dark:hover:text-primary-400 font-medium underline-animation">Education</a>
+          <a href="index.html#contact" class="text-dark dark:text-light hover:text-primary-600 dark:hover:text-primary-400 font-medium underline-animation">Contact</a>
+         <a href="vlog.html" class="text-dark dark:text-light hover:text-primary-600 dark:hover:text-primary-400 font-medium underline-animation">Bolgs</a>
+        </div>
+      </div>
+    </div>
+</nav>
+
+<body class="min-h-screen">
+  <div id="threejs-bg"></div>
+  
+  <div id="particle-canvas"></div>
+  
+  <main class="container mx-auto px-4 py-12 max-w-6xl">
+    <header class="mb-16 text-center">
+      <h1 class="text-5xl md:text-6xl font-display font-bold mb-4 gradient-text">
+        Knowledge <span class="inline-block">Space</span>
+      </h1>
+      <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+        Explore thoughts, ideas, and stories in this immersive digital experience
+      </p>
+    </header>
+    
+    <section class="mb-16">
+      
+      <div class="featured-card bg-white rounded-2xl overflow-hidden border border-gray-200 shadow-lg mb-8">
+        <div class="flex flex-col lg:flex-row">
+          <div class="lg:w-1/2 h-64 lg:h-auto flex items-center justify-center p-8"
+              style="background-image: url('cc.jpg'); background-size: cover; background-position: center;">
+            <div class="text-center">
+              <div class="text-4xl font-display font-bold mb-3 text-white">"Ella's Mystical Mountains"</div>
+              <p class="text-gray-100 mb-4">A journey through misty peaks and hidden waterfalls</p>
+              <div class="inline-flex items-center px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full border border-white/20 text-white">
+                <span class="text-sm">Read Time: 8 min</span>
+              </div>
+            </div>
+          </div>
+          <div class="lg:w-1/2 p-8">
+            <div class="flex items-center mb-4">
+              <div class="w-10 h-10 rounded-full bg-primary-500 flex items-center justify-center text-white font-bold mr-3">AD</div>
+              <div>
+                <div class="font-medium text-gray-900">Aruna Darshana</div>
+                <div class="text-sm text-gray-500 flex items-center space-x-2">
+                  <span>Agu 7, 2025 ·</span>
+                  <button class="comment-btn flex items-center text-sm text-gray-500 hover:text-gray-900" data-blog-id="1">
+                    <i class="far fa-comment mr-1"></i> <span class="comment-count">0</span> comments
+                  </button>
+                </div>
+              </div>
+            </div>
+            <p class="text-gray-700 mb-6">
+              Have you ever dreamt of a place where the air is fresh, the scenery is breathtaking, and every corner holds a new adventure?.....
+            </p>
+            <div class="flex flex-wrap gap-2 mb-6">
+              <span class="px-3 py-1 bg-gray-100 text-sm rounded-full text-gray-700">#travel</span>
+              <span class="px-3 py-1 bg-gray-100 text-sm rounded-full text-gray-700">#adventure</span>
+              <span class="px-3 py-1 bg-gray-100 text-sm rounded-full text-gray-700">#srilanka</span>
+            </div>
+            <a href="alla.html" class="px-6 py-2 bg-primary-600 hover:bg-primary-700 text-white rounded-lg transition-all flex items-center w-max">
+              Continue Reading
+              <i class="fas fa-arrow-right ml-2"></i>
+            </a>
+            <div class="comment-section mt-4 hidden" data-blog-id="1">
+              <div class="mb-4">
+                <textarea class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500" placeholder="Add a comment..."></textarea>
+                <button class="mt-2 px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700 submit-comment" data-blog-id="1">Post Comment</button>
+              </div>
+              <div class="comments-list space-y-3">
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="featured-card bg-white rounded-2xl overflow-hidden border border-gray-200 shadow-lg">
+        <div class="flex flex-col lg:flex-row">
+          <div class="lg:w-1/2 h-64 lg:h-auto flex items-center justify-center p-8"
+              style="background-image: url('Sigiriya_800x520.jpg'); background-size: cover; background-position: center;">
+            <div class="text-center">
+              <div class="text-4xl font-display font-bold mb-3 text-white">"Sigiriya's Mystical Mountains"</div>
+              <p class="text-gray-100 mb-4">Climbing the lion's rock and discovering a royal past.</p>
+              <div class="inline-flex items-center px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full border border-white/20 text-white">
+                <span class="text-sm">Read Time: 8 min</span>
+              </div>
+            </div>
+          </div>
+          <div class="lg:w-1/2 p-8">
+            <div class="flex items-center mb-4">
+              <div class="w-10 h-10 rounded-full bg-primary-500 flex items-center justify-center text-white font-bold mr-3">AD</div>
+              <div>
+                <div class="font-medium text-gray-900">Aruna Darshana</div>
+                <div class="text-sm text-gray-500 flex items-center space-x-2">
+                  <span>July 10, 2025 ·</span>
+                  <button class="comment-btn flex items-center text-sm text-gray-500 hover:text-gray-900" data-blog-id="2">
+                    <i class="far fa-comment mr-1"></i> <span class="comment-count">0</span> comments
+                  </button>
+                </div>
+              </div>
+            </div>
+            <p class="text-gray-700 mb-6">
+              The journey to Sigiriya was like stepping back in time. As we approached the majestic rock fortress, the giant lion paws at its base emerged from the surrounding jungle, whispering tales of a bygone era. The sight of this colossal monolith piercing the sky, especially with the morning mist swirling around it, was nothing short of a dream.......
+            </p>
+            <div class="flex flex-wrap gap-2 mb-6">
+              <span class="px-3 py-1 bg-gray-100 text-sm rounded-full text-gray-700">#travel</span>
+              <span class="px-3 py-1 bg-gray-100 text-sm rounded-full text-gray-700">#adventure</span>
+              <span class="px-3 py-1 bg-gray-100 text-sm rounded-full text-gray-700">#srilanka</span>
+            </div>
+            <a href="sigiriya.html" class="px-6 py-2 bg-primary-600 hover:bg-primary-700 text-white rounded-lg transition-all flex items-center w-max">
+              Continue Reading
+              <i class="fas fa-arrow-right ml-2"></i>
+            </a>
+            <div class="comment-section mt-4 hidden" data-blog-id="2">
+              <div class="mb-4">
+                <textarea class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500" placeholder="Add a comment..."></textarea>
+                <button class="mt-2 px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700 submit-comment" data-blog-id="2">Post Comment</button>
+              </div>
+              <div class="comments-list space-y-3">
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+    
+<script>
+  // Initialize Three.js background
+  function initThreeJS() {
+    const container = document.getElementById('threejs-bg');
+    if (!container) return;
+    const width = container.clientWidth;
+    const height = container.clientHeight;
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+    renderer.setSize(width, height);
+    container.appendChild(renderer.domElement);
+    const particlesGeometry = new THREE.BufferGeometry();
+    const particleCount = 500;
+    const posArray = new Float32Array(particleCount * 3);
+    for (let i = 0; i < particleCount * 3; i++) {
+      posArray[i] = (Math.random() - 0.5) * 10;
+    }
+    particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+    const particlesMaterial = new THREE.PointsMaterial({
+      size: 0.02,
+      color: 0x0ea5e9,
+      transparent: true,
+      opacity: 0.3,
+    });
+    const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+    scene.add(particlesMesh);
+    camera.position.z = 3;
+    function animate() {
+      requestAnimationFrame(animate);
+      particlesMesh.rotation.x += 0.0005;
+      particlesMesh.rotation.y += 0.0005;
+      renderer.render(scene, camera);
+    }
+    animate();
+    window.addEventListener('resize', () => {
+      const width = container.clientWidth;
+      const height = container.clientHeight;
+      camera.aspect = width / height;
+      camera.updateProjectionMatrix();
+      renderer.setSize(width, height);
+    });
+  }
+
+  // Initialize p5.js particle canvas
+  function initP5Particles() {
+    if (typeof p5 === 'undefined') return;
+    return new p5((p) => {
+      let particles = [];
+      const particleCount = window.innerWidth < 768 ? 30 : 100;
+      p.setup = () => {
+        const canvas = p.createCanvas(p.windowWidth, p.windowHeight);
+        canvas.parent('particle-canvas');
+        canvas.elt.style.pointerEvents = 'none';
+        for (let i = 0; i < particleCount; i++) {
+          particles.push({
+            x: p.random(p.width),
+            y: p.random(p.height),
+            size: p.random(2, 5),
+            speedX: p.random(-0.5, 0.5),
+            speedY: p.random(-0.5, 0.5),
+            color: p.color(14, 165, 233, p.random(30, 80))
+          });
+        }
+      };
+      p.draw = () => {
+        p.clear();
+        for (let i = 0; i < particles.length; i++) {
+          let particle = particles[i];
+          particle.x += particle.speedX;
+          particle.y += particle.speedY;
+          if (particle.x > p.width) particle.x = 0;
+          if (particle.x < 0) particle.x = p.width;
+          if (particle.y > p.height) particle.y = 0;
+          if (particle.y < 0) particle.y = p.height;
+          p.noStroke();
+          p.fill(particle.color);
+          p.ellipse(particle.x, particle.y, particle.size);
+          for (let j = i + 1; j < particles.length; j++) {
+            let other = particles[j];
+            let distance = p.dist(particle.x, particle.y, other.x, other.y);
+            if (distance < 150) {
+              p.stroke(14, 165, 233, p.map(distance, 0, 150, 30, 0));
+              p.line(particle.x, particle.y, other.x, other.y);
+            }
+          }
+        }
+      };
+      p.windowResized = () => {
+        p.resizeCanvas(p.windowWidth, p.windowHeight);
+      };
+    });
+  }
+
+  // Sample data structure to hold comments (This is a simplified in-memory store)
+  const commentsData = {
+    '1': [
+      { id: 1, author: 'Kavindu Perera', text: 'Wow, Ella is truly a paradise! I can feel the misty air just by looking at the photo.', date: 'August 5, 2025' },
+      { id: 2, author: 'Nimali Fernando', text: 'I visited last year and it was magical. The train ride is a must-do!', date: 'August 5, 2025' }
+    ],
+    '2': [
+      { id: 3, author: 'Chathuranga Dissanayake', text: 'Sigiriya is breathtaking. Your photos are amazing!', date: 'July 11, 2025' }
+    ]
+  };
+
+  // Function to render existing comments and update count
+  function renderCommentsForBlog(blogId) {
+    const commentsList = document.querySelector(`.comments-list[data-blog-id="${blogId}"]`);
+    const commentCountSpan = document.querySelector(`.comment-btn[data-blog-id="${blogId}"] .comment-count`);
+
+    // Clear any existing comments
+    commentsList.innerHTML = '';
+
+    const comments = commentsData[blogId] || [];
+
+    // Update the comment count
+    commentCountSpan.textContent = comments.length;
+
+    // Render each comment
+    comments.forEach(comment => {
+      const newComment = document.createElement('div');
+      newComment.className = 'comment bg-gray-50 p-3 rounded-md relative';
+      newComment.setAttribute('data-comment-id', comment.id); // Add a unique ID
+      newComment.innerHTML = `
+        <div class="flex items-center justify-between">
+          <div class="flex items-center">
+            <div class="w-6 h-6 rounded-full bg-gray-300 mr-2"></div>
+            <span class="text-sm font-medium">${comment.author}</span>
+          </div>
+          <span class="text-xs text-gray-500">${comment.date}</span>
+        </div>
+        <p class="text-sm mt-1">${comment.text}</p>
+        <button class="delete-comment-btn absolute top-2 right-2 text-red-500 hover:text-red-700 opacity-0 group-hover:opacity-100 transition-opacity">
+          <i class="fas fa-trash-alt"></i>
+        </button>
+      `;
+      commentsList.appendChild(newComment);
+    });
+  }
+
+  // Setup comment and reaction functionality
+  function setupCommentFunctionality() {
+    // Render initial comments and counts for all blogs
+    document.querySelectorAll('.comment-section').forEach(section => {
+      const blogId = section.getAttribute('data-blog-id');
+      renderCommentsForBlog(blogId);
+    });
+
+    // Toggle comment section
+    document.querySelectorAll('.comment-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const blogId = this.getAttribute('data-blog-id');
+        const commentSection = document.querySelector(`.comment-section[data-blog-id="${blogId}"]`);
+        commentSection.classList.toggle('hidden');
+      });
+    });
+
+    // Handle new comment submission
+    document.querySelectorAll('.submit-comment').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const blogId = this.getAttribute('data-blog-id');
+        const textarea = this.previousElementSibling;
+        const commentText = textarea.value.trim();
+
+        if (commentText) {
+          // Add comment to our in-memory data
+          if (!commentsData[blogId]) {
+            commentsData[blogId] = [];
+          }
+          const newCommentId = new Date().getTime(); // Simple unique ID
+          commentsData[blogId].push({
+            id: newCommentId,
+            author: 'You',
+            text: commentText,
+            date: 'Just now'
+          });
+
+          // Re-render the comments list to show the new comment
+          renderCommentsForBlog(blogId);
+          textarea.value = '';
+        }
+      });
+    });
+
+    // Handle comment deletion (using event delegation on the parent list)
+    document.querySelectorAll('.comments-list').forEach(list => {
+      list.addEventListener('click', function(e) {
+        // Check if the clicked element is a delete button
+        if (e.target.closest('.delete-comment-btn')) {
+          const commentElement = e.target.closest('.comment');
+          const commentId = parseInt(commentElement.getAttribute('data-comment-id'));
+          const blogId = this.getAttribute('data-blog-id');
+
+          // Find and remove comment from the data
+          commentsData[blogId] = commentsData[blogId].filter(c => c.id !== commentId);
+
+          // Re-render comments to update the list and count
+          renderCommentsForBlog(blogId);
+        }
+      });
+    });
+  }
+
+  // Initialize on page load
+  document.addEventListener('DOMContentLoaded', () => {
+    if (document.getElementById('threejs-bg') && typeof THREE !== 'undefined') {
+      initThreeJS();
+    }
+    if (document.getElementById('particle-canvas') && typeof p5 !== 'undefined') {
+      initP5Particles();
+    }
+    setupCommentFunctionality();
+  });
+</script>
+</body>
+</html>
