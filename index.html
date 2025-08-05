@@ -1535,6 +1535,57 @@
       }
     }
   });
+// Dark mode toggle functionality
+const themeToggle = document.getElementById('theme-toggle');
+const themeToggleMobile = document.getElementById('theme-toggle-mobile');
+const themeIconLight = document.getElementById('theme-icon-light');
+const themeIconDark = document.getElementById('theme-icon-dark');
+const themeIconLightMobile = document.getElementById('theme-icon-light-mobile');
+const themeIconDarkMobile = document.getElementById('theme-icon-dark-mobile');
+
+// Check for saved user preference or use system preference
+const currentTheme = localStorage.getItem('theme') || 
+                    (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+
+// Apply the current theme
+if (currentTheme === 'dark') {
+    document.documentElement.classList.add('dark');
+    themeIconLight.classList.add('hidden');
+    themeIconDark.classList.remove('hidden');
+    themeIconLightMobile.classList.add('hidden');
+    themeIconDarkMobile.classList.remove('hidden');
+} else {
+    document.documentElement.classList.remove('dark');
+    themeIconLight.classList.remove('hidden');
+    themeIconDark.classList.add('hidden');
+    themeIconLightMobile.classList.remove('hidden');
+    themeIconDarkMobile.classList.add('hidden');
+}
+
+// Theme toggle handler
+function toggleTheme() {
+    if (document.documentElement.classList.contains('dark')) {
+        document.documentElement.classList.remove('dark');
+        localStorage.setItem('theme', 'light');
+        themeIconLight.classList.remove('hidden');
+        themeIconDark.classList.add('hidden');
+        themeIconLightMobile.classList.remove('hidden');
+        themeIconDarkMobile.classList.add('hidden');
+    } else {
+        document.documentElement.classList.add('dark');
+        localStorage.setItem('theme', 'dark');
+        themeIconLight.classList.add('hidden');
+        themeIconDark.classList.remove('hidden');
+        themeIconLightMobile.classList.add('hidden');
+        themeIconDarkMobile.classList.remove('hidden');
+    }
+}
+
+// Add event listeners
+themeToggle.addEventListener('click', toggleTheme);
+themeToggleMobile.addEventListener('click', toggleTheme);
+    
 </script>
 </body>
+
 </html>
