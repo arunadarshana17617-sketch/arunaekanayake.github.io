@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ella, Sri Lanka – A Journey Through Paradise</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Inter"', 'sans-serif'],
+            display: ['"Playfair Display"', 'serif'],
+          },
+          colors: {
+            primary: {
+              50: '#f0f9f0',
+              100: '#daf1db',
+              200: '#b8e4ba',
+              300: '#88d08c',
+              400: '#5cb562',
+              500: '#3e8e41',
+              600: '#2f7132',
+              700: '#275a29',
+              800: '#224824',
+              900: '#1d3b1f',
+            },
+            secondary: {
+              50: '#f6f7f9',
+              100: '#eceff3',
+              200: '#d5dbe4',
+              300: '#b0bccd',
+              400: '#8598b1',
+              500: '#667b98',
+              600: '#50637d',
+              700: '#425167',
+              800: '#394556',
+              900: '#333c49',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- GSAP for animations -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
+  <style>
+    .image-container {
+      position: relative;
+      overflow: hidden;
+      border-radius: 1rem;
+      min-height: 300px;
+    }
+    
+    .image-container img {
+      transition: transform 0.5s ease;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .image-container:hover img {
+      transform: scale(1.03);
+    }
+    
+    .image-container::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.3) 100%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      border-radius: 1rem;
+    }
+    
+    .image-container:hover::after {
+      opacity: 1;
+    }
+    
+    .text-shadow {
+      text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0px); }
+    }
+    
+    .floating {
+      animation: float 6s ease-in-out infinite;
+    }
+    
+    .section-divider {
+      position: relative;
+      height: 120px;
+      overflow: hidden;
+    }
+    
+    .section-divider svg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-b from-primary-50 to-white font-sans text-secondary-900 antialiased">
+
+<!-- Floating Back Button -->
+<a href="vlog.html" class="back-button fixed top-6 left-6 z-50 bg-primary-500 text-white p-3 rounded-full shadow-lg hover:bg-primary-600 flex items-center justify-center w-12 h-12">
+  <svg xmlns="http://www.w3.org/2000/svg" class-="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+  </svg>
+</a>
+
+<!-- Hero Section -->
+<div class="relative overflow-hidden">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 md:py-48">
+    <div class="relative z-10 text-center">
+      <h1 class="text-4xl md:text-6xl font-display font-bold text-primary-700 mb-6 text-shadow">
+        <span class="block">Ella, Sri Lanka</span>
+        <span class="block text-2xl md:text-4xl font-normal mt-4 text-secondary-600">A Journey Through Paradise</span>
+      </h1>
+      <div class="mt-10 flex justify-center">
+        
+            
+              
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Wave divider -->
+  <div class="section-divider">
+    <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+      <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25" fill="currentColor" class="text-primary-100"></path>
+      <path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" opacity=".5" fill="currentColor" class="text-primary-100"></path>
+      <path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" fill="currentColor" class="text-primary-100"></path>
+    </svg>
+  </div>
+</div>
+
+<!-- Content Container -->
+<div class="max-w-7xl mx-auto px-6 sm:px-8 py-12 relative z-10">
+  <div class="prose prose-lg md:prose-xl prose-primary max-w-none">
+    <p class="text-secondary-600 leading-relaxed mb-8">
+      Have you ever dreamt of a place where the air is fresh, the scenery is breathtaking, and every corner holds a new adventure?
+      Welcome to Ella, a small slice of paradise in the heart of Sri Lanka's hill country. This isn't just another travel destination;
+      it's a feeling, a memory, and an experience that will stay with you forever.
+    </p>
+
+    <p class="text-secondary-600 leading-relaxed mb-12">
+      My journey to Ella was something special. The famous train journey from Kandy to Ella is often called one of the most beautiful
+      train rides in the world, and for good reason! As the train slowly wound its way through tea plantations and misty mountains,
+      I felt like I was stepping into a real-life painting.
+    </p>
+
+    <!-- Nine Arch Bridge Section -->
+    <div class="my-20 grid md:grid-cols-2 gap-8 items-center">
+      <div class="image-container shadow-xl order-1">
+        <img src="nine-arch-bridge-demodara-sri-lanka-945x630.jpg" alt="Nine Arch Bridge" class="w-full h-full" />
+      </div>
+      <div class="order-2">
+        <h2 class="text-3xl md:text-4xl font-display font-bold text-primary-700 mb-6">
+          <span class="bg-clip-text text-transparent bg-gradient-to-r from-primary-500 to-primary-700">
+            1. The Iconic Nine Arch Bridge
+          </span>
+        </h2>
+        <p class="text-secondary-600 leading-relaxed">
+          The Nine Arch Bridge is more than just a bridge; it's a work of art. Built during the British colonial era, this massive stone bridge is
+          tucked away between lush green hills, making it a perfect spot for photos. We walked along the railway track and waited for a train to
+          pass, and the sight of that old engine chugging over the arches, surrounded by jungle, felt truly magical.
+        </p>
+      </div>
+    </div>
+
+    <!-- Ravana Falls Section -->
+    <div class="my-20 grid md:grid-cols-2 gap-8 items-center">
+      <div class="order-2 md:order-1">
+        <h2 class="text-3xl md:text-4xl font-display font-bold text-primary-700 mb-6">
+          <span class="bg-clip-text text-transparent bg-gradient-to-r from-primary-500 to-primary-700">
+            2. The Magnificent Ravana Falls
+          </span>
+        </h2>
+        <p class="text-secondary-600 leading-relaxed">
+          Just a short ride from Ella town, Ravana Falls stands as a powerful reminder of nature's beauty. This stunning waterfall, with its water
+          crashing down from a height of about 25 meters, is named after the legendary King Ravana from the Ramayana epic. The sound of the water,
+          the cool mist in the air, and the lush greenery around it create a truly serene atmosphere.
+        </p>
+      </div>
+      <div class="image-container shadow-xl order-1 md:order-2">
+        <img src="1520183816257.jpg" alt="Ravana Falls" class="w-full h-full" />
+      </div>
+    </div>
+
+    <!-- Little Adam's Peak Section -->
+    <div class="my-20 grid md:grid-cols-2 gap-8 items-center">
+      <div class="image-container shadow-xl order-1">
+        <img src="99.jpg" alt="Little Adam's Peak" class="w-full h-full" />
+      </div>
+      <div class="order-2">
+        <h2 class="text-3xl md:text-4xl font-display font-bold text-primary-700 mb-6">
+          <span class="bg-clip-text text-transparent bg-gradient-to-r from-primary-500 to-primary-700">
+            3. The Little Adam's Peak Hike
+          </span>
+        </h2>
+        <p class="text-secondary-600 leading-relaxed">
+          If you're looking for an easy hike with an incredible reward, Little Adam's Peak is the place to go. The trail is well-maintained and
+          doesn't require any special skills. As you climb, you're surrounded by rolling hills covered in tea plantations. The real magic happens
+          at the top—with breathtaking panoramic views of Ella valley, Ella Rock, and the surrounding hills.
+        </p>
+      </div>
+    </div>
+
+    <!-- Ella Rock Section -->
+    <div class="my-20 grid md:grid-cols-2 gap-8 items-center">
+      <div class="order-2 md:order-1">
+        <h2 class="text-3xl md:text-4xl font-display font-bold text-primary-700 mb-6">
+          <span class="bg-clip-text text-transparent bg-gradient-to-r from-primary-500 to-primary-700">
+            4. Ella Rock: The Ultimate Challenge
+          </span>
+        </h2>
+        <p class="text-secondary-600 leading-relaxed">
+          For those who love a bit of a challenge, Ella Rock is the ultimate adventure. This hike is longer and more demanding than Little Adam's Peak,
+          but the sense of accomplishment at the top is immense. The trail takes you through forests, past waterfalls, and up steep inclines, ending
+          in a view that truly makes you feel on top of the world.
+        </p>
+      </div>
+      <div class="image-container shadow-xl order-1 md:order-2">
+        <img src="a-guide-to-the-best-hikes-in-ella-slider-2.jpg" alt="Ella Rock" class="w-full h-full" />
+      </div>
+    </div>
+
+    <!-- Tea Plantations Section -->
+    <div class="my-20 grid md:grid-cols-2 gap-8 items-center">
+      <div class="image-container shadow-xl order-1">
+        <img src="istockphoto-1422015139-612x612.jpg" alt="Tea Plantations" class="w-full h-full" />
+      </div>
+      <div class="order-2">
+        <h2 class="text-3xl md:text-4xl font-display font-bold text-primary-700 mb-6">
+          <span class="bg-clip-text text-transparent bg-gradient-to-r from-primary-500 to-primary-700">
+            5. Tea Plantations: Ella's Green Gold
+          </span>
+        </h2>
+        <p class="text-secondary-600 leading-relaxed">
+          Ella's landscape is defined by its vibrant green tea plantations. We took a tour of a local tea factory, where we learned all about the
+          process of making the world-famous Ceylon tea. Walking through the neatly planted rows of tea bushes, with women plucking leaves by hand,
+          was humbling. And sipping a fresh cup of tea while looking out over the hills? Pure bliss.
+        </p>
+      </div>
+    </div>
+
+    <!-- Closing Quote -->
+    <div class="my-16 p-8 bg-primary-50 rounded-xl border border-primary-100">
+      <p class="text-secondary-700 text-xl italic leading-relaxed">
+        "Ella is more than just a travel destination; it's a place that makes you feel alive. It's the tranquility of the mountains, the adventure
+        of the hikes, and the warmth of the people—all wrapped up into one magical experience. If you're looking for a trip that will fill your
+        heart with joy and your camera with stunning photos, Ella is waiting for you."
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="bg-primary-900 text-white py-16 mt-20">
+  <div class="max-w-7xl mx-auto px-6 text-center">
+    <p class="text-primary-200 mb-8">© 2023 Ella, Sri Lanka Journey</p>
+    <div class="flex justify-center space-x-6">
+      
+        
+       
+          <path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z" clip-rule="evenodd" />
+        </svg>
+      </a>
+     
+      </a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // GSAP Animations
+    gsap.registerPlugin(ScrollTrigger);
+    
+    // Animate sections on scroll
+    gsap.utils.toArray('.grid').forEach((section, index) => {
+      gsap.from(section, {
+        scrollTrigger: {
+          trigger: section,
+          start: "top 70%",
+          toggleActions: "play none none none"
+        },
+        opacity: 0,
+        y: 50,
+        duration: 0.8,
+        ease: "power2.out",
+        delay: index * 0.1
+      });
+    });
+    
+    // Image hover animations
+    gsap.utils.toArray('.image-container').forEach(container => {
+      const img = container.querySelector('img');
+      
+      container.addEventListener('mouseenter', () => {
+        gsap.to(img, {
+          scale: 1.05,
+          duration: 0.5,
+          ease: "power2.out"
+        });
+      });
+      
+      container.addEventListener('mouseleave', () => {
+        gsap.to(img, {
+          scale: 1,
+          duration: 0.5,
+          ease: "power2.out"
+        });
+      });
+    });
+    
+    // Back button hover animation
+    const backButton = document.querySelector('.back-button');
+    backButton.addEventListener('mouseenter', () => {
+      gsap.to(backButton, { 
+        x: -5,
+        duration: 0.3,
+        ease: "power2.out"
+      });
+    });
+    backButton.addEventListener('mouseleave', () => {
+      gsap.to(backButton, { 
+        x: 0,
+        duration: 0.3,
+        ease: "power2.out"
+      });
+    });
+  });
+</script>
+</body>
+</html>
