@@ -4,7 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Aruna Ekanayake | Creative Developer & Designer</title>
-  <!-- CDN Tools -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/controls/OrbitControls.js"></script>
@@ -13,7 +12,8 @@
   <script src="https://cdn.jsdelivr.net/npm/p5@1.6.0/lib/p5.min.js"></script>
   <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:..." rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RMWiB6yF2F+Ld2r/A8wP+1hE5UeH1z+EwN0zB2bSj9I2L+YwA1wKqWd/k+H4GqB8pQJ+A9g" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <script src="https://kit.fontawesome.com/a2e0e6c44f.js" crossorigin="anonymous"></script>
   <script>
     tailwind.config = {
@@ -220,6 +220,135 @@
       background: rgba(15, 23, 42, 0.7);
       border: 1px solid rgba(255, 255, 255, 0.05);
     }
+    
+    /* Modal styles */
+    .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+    
+    .modal.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .modal-content {
+      background: white;
+      border-radius: 12px;
+      max-width: 800px;
+      width: 90%;
+      max-height: 90vh;
+      overflow-y: auto;
+      position: relative;
+      transform: translateY(20px);
+      transition: transform 0.3s ease;
+    }
+    
+    .dark .modal-content {
+      background: #1e293b;
+    }
+    
+    .modal.active .modal-content {
+      transform: translateY(0);
+    }
+    
+    .modal-close {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #6b7280;
+      z-index: 10;
+    }
+    
+    .modal-close:hover {
+      color: #374151;
+    }
+    
+    .dark .modal-close:hover {
+      color: #d1d5db;
+    }
+    
+    /* GitHub button styles */
+    .github-btn-modern {
+      position: relative;
+      background: linear-gradient(135deg, #161b22 0%, #0d1117 100%);
+      color: white;
+      border: 1px solid rgba(110, 64, 201, 0.3);
+      overflow: hidden;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    }
+    
+    .github-btn-modern::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(110, 64, 201, 0.2), transparent);
+      transition: left 0.7s ease;
+    }
+    
+    .github-btn-modern:hover::before {
+      left: 100%;
+    }
+    
+    .github-btn-modern:hover {
+      border-color: rgba(110, 64, 201, 0.6);
+      background: linear-gradient(135deg, #1a1f29 0%, #111827 100%);
+    }
+    
+    .github-btn-modern .github-icon {
+      transition: all 0.3s ease;
+      filter: drop-shadow(0 0 8px rgba(110, 64, 201, 0.5));
+    }
+    
+    .github-btn-modern:hover .github-icon {
+      transform: scale(1.2) rotate(5deg);
+      filter: drop-shadow(0 0 12px rgba(110, 64, 201, 0.8));
+    }
+    
+    .github-btn-modern .github-text {
+      position: relative;
+      z-index: 1;
+      background: linear-gradient(90deg, #ffffff, #e5e7eb);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      font-weight: 600;
+    }
+    
+    .github-btn-modern:hover .github-text {
+      background: linear-gradient(90deg, #ffffff, #d1d5db);
+      -webkit-background-clip: text;
+      background-clip: text;
+    }
+    
+    .dark .github-btn-modern {
+      background: linear-gradient(135deg, #0d1117 0%, #161b22 100%);
+      border: 1px solid rgba(110, 64, 201, 0.4);
+    }
+    
+    .dark .github-btn-modern:hover {
+      background: linear-gradient(135deg, #111827 0%, #1a1f29 100%);
+      border-color: rgba(110, 64, 201, 0.7);
+    }
   </style>
 </head>
 <body class="bg-light font-sans text-dark antialiased overflow-x-hidden dark:bg-dark dark:text-light transition-colors duration-300 noise">
@@ -368,13 +497,8 @@
       </div>
     </div>
     
-    
+  </section>
 
-
-
-
-
-  
   <!-- About Section -->
   <section id="about" class="py-20 bg-white dark:bg-gray-900 relative overflow-hidden">
     <div class="absolute inset-0 grid-pattern -z-10"></div>
@@ -570,63 +694,58 @@
             <span class="gradient-text">Tech Stack</span>
           </h3>
           
-          <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-md glass">
-            <div class="flex flex-wrap justify-center gap-6">
+         <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-md glass">
+    <div class="flex flex-wrap justify-center gap-6">
+      <!-- HTML5 -->
+      <div class="flex flex-col items-center">
+        <div class="w-16 h-16 bg-primary-50 dark:bg-gray-700 rounded-full flex items-center justify-center mb-2">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" class="w-10 h-10 text-orange-500">
+            <path fill="currentColor" d="M0 32l34.9 395.8L191.5 480l157.6-52.2L384 32H0zm308.2 127.9H124.4l4.1 49.4h175.6l-13.6 148.4-97.9 27v.3h-1.1l-98.7-27.3-6-75.8h47.7L138 320l53.5 14.5 53.7-14.5 6-62.2H84.3L71.5 112.2h241.1l-4.4 47.7z"/>
+          </svg>
+        </div>
+        <span class="text-sm text-gray-600 dark:text-gray-300">HTML5</span>
+      </div>
               <div class="flex flex-col items-center">
                 <div class="w-16 h-16 bg-primary-50 dark:bg-gray-700 rounded-full flex items-center justify-center mb-2">
-                     <img src="12b2ce999d6ba78fae64d56bff075e64.jpg" alt="Development Icon" class="w-full h-full object-cover rounded-xl">
-                  <i class="fab fa-html5 text-3xl text-orange-500"></i>
-
-                </div>
-                <span class="text-sm text-gray-600 dark:text-gray-300">HTML5</span>
-              </div>
-              <div class="flex flex-col items-center">
-                <div class="w-16 h-16 bg-primary-50 dark:bg-gray-700 rounded-full flex items-center justify-center mb-2">
-                   <img src="download.png" alt="Development Icon" class="w-full h-full object-cover rounded-xl">
-                  <i class="fab fa-css3-alt text-3xl text-blue-500"></i>
-                  
+                  <img src="download.png" alt="CSS3" class="w-10 h-10 object-contain">
                 </div>
                 <span class="text-sm text-gray-600 dark:text-gray-300">CSS3</span>
               </div>
+
               <div class="flex flex-col items-center">
                 <div class="w-16 h-16 bg-primary-50 dark:bg-gray-700 rounded-full flex items-center justify-center mb-2">
-                  <img src="depositphotos_41138921-stock-illustration-vector-icon-of-orange-javascript.jpg" alt="Development Icon" class="w-full h-full object-cover rounded-xl">
-                  <i class="fab fa-js text-3xl text-yellow-500"></i>
+                  <img src="depositphotos_41138921-stock-illustration-vector-icon-of-orange-javascript.jpg" alt="JavaScript" class="w-10 h-10 object-contain">
                 </div>
                 <span class="text-sm text-gray-600 dark:text-gray-300">JavaScript</span>
               </div>
+
               <div class="flex flex-col items-center">
                 <div class="w-16 h-16 bg-primary-50 dark:bg-gray-700 rounded-full flex items-center justify-center mb-2">
-                  <img src="226777.png" alt="Development Icon" class="w-full h-full object-cover rounded-xl">
-                  <i class="fab fa-java text-3xl text-red-500"></i>
+                  <img src="226777.png" alt="Java" class="w-10 h-10 object-contain">
                 </div>
                 <span class="text-sm text-gray-600 dark:text-gray-300">Java</span>
               </div>
               <div class="flex flex-col items-center">
                 <div class="w-16 h-16 bg-primary-50 dark:bg-gray-700 rounded-full flex items-center justify-center mb-2">
-                  <img src="images.png" alt="Development Icon" class="w-full h-full object-cover rounded-xl">
-                  <i class="fas fa-database text-3xl text-blue-400"></i>
+                  <img src="images.png" alt="MySQL" class="w-10 h-10 object-contain">
                 </div>
                 <span class="text-sm text-gray-600 dark:text-gray-300">MySQL</span>
               </div>
               <div class="flex flex-col items-center">
                 <div class="w-16 h-16 bg-primary-50 dark:bg-gray-700 rounded-full flex items-center justify-center mb-2">
-                  <img src="Git_icon.svg.png" alt="Development Icon" class="w-full h-full object-cover rounded-xl">
-                  <i class="fab fa-git-alt text-3xl text-orange-600"></i>
+                  <img src="Git_icon.svg.png" alt="Git" class="w-10 h-10 object-contain">
                 </div>
                 <span class="text-sm text-gray-600 dark:text-gray-300">Git</span>
               </div>
               <div class="flex flex-col items-center">
                 <div class="w-16 h-16 bg-primary-50 dark:bg-gray-700 rounded-full flex items-center justify-center mb-2">
-                  <img src="1_6XgfDCVn81AYX68Xvd2I-g@2x.png" alt="Development Icon" class="w-full h-full object-cover rounded-xl">
-                  <i class="fab fa-figma text-3xl text-purple-500"></i>
+                  <img src="1_6XgfDCVn81AYX68Xvd2I-g@2x.png" alt="Figma" class="w-10 h-10 object-contain">
                 </div>
                 <span class="text-sm text-gray-600 dark:text-gray-300">Figma</span>
               </div>
               <div class="flex flex-col items-center">
                 <div class="w-16 h-16 bg-primary-50 dark:bg-gray-700 rounded-full flex items-center justify-center mb-2">
-                  <img src="1_oUH0ByyW-KOtLe1jAL2GqA.jpg" alt="Development Icon" class="w-full h-full object-cover rounded-xl">
-                  <i class="fas fa-cube text-3xl text-pink-500"></i>
+                  <img src="1_oUH0ByyW-KOtLe1jAL2GqA.jpg" alt="Three.js" class="w-10 h-10 object-contain">
                 </div>
                 <span class="text-sm text-gray-600 dark:text-gray-300">Three.js</span>
               </div>
@@ -636,8 +755,8 @@
       </div>
     </div>
   </section> 
- 
- <!-- Projects Section -->
+  
+  <!-- Projects Section -->
   <section id="projects" class="py-20 bg-white dark:bg-gray-900 relative overflow-hidden">
     <div class="absolute inset-0 grid-pattern -z-10"></div>
     <div class="container mx-auto px-6">
@@ -660,7 +779,7 @@
               </div>
             </div>
             <div class="absolute inset-0 bg-primary-600/10 dark:bg-primary-400/10 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-              <a href="#project1-details" class="px-6 py-3 bg-primary-600 text-white rounded-full font-medium opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 flex items-center">
+              <a href="#" class="px-6 py-3 bg-primary-600 text-white rounded-full font-medium opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 flex items-center" data-modal-target="project1-details">
                 <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
@@ -686,114 +805,15 @@
               <span class="px-3 py-1 bg-gray-100 dark:bg-gray-700 rounded-full text-xs font-mono">JDBC</span>
               <span class="px-3 py-1 bg-gray-100 dark:bg-gray-700 rounded-full text-xs font-mono">Encryption</span>
             </div>
-            <a href="#project1-case-study" class="inline-flex items-center text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 transition-colors duration-300">
-              <span>View Case Study</span>
-              <i class="fas fa-arrow-right ml-2"></i>
-            </a>
-          </div>
-        </div>
-        
-        <!-- Project 1 Details Modal -->
-        <div id="project1-details" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4 opacity-0 invisible transition-opacity duration-300">
-          <div class="bg-white dark:bg-gray-800 rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
-            <div class="p-6">
-              <div class="flex justify-between items-center mb-4">
-                <h3 class="text-2xl font-display font-bold">Medical Prescription System - Details</h3>
-                <button class="close-modal text-gray-500 hover:text-gray-700 dark:hover:text-gray-300">
-                  <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                  </svg>
-                </button>
-              </div>
-              <div class="space-y-4">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                  <div>
-                    <h4 class="font-display font-semibold mb-2">Key Features</h4>
-                    <ul class="list-disc pl-5 space-y-2 text-gray-600 dark:text-gray-300">
-                      <li>User-Friendly Interface: The system provides separate, easy-to-use interfaces for nurses, doctors, and pharmacists.</li>
-                      <li>Patient Data Management: Securely stores and retrieves patient information using a unique ID or hospital number.</li>
-                      <li>Digital Prescription Module: Doctors can digitally prescribe medication, which is then automatically sent to the pharmacy module.</li>
-                      <li>Prescription History: Maintains a clear record of past prescriptions for each patient, enabling doctors to make informed decisions.</li>
-                      <li>Automated Billing: Generates a detailed bill for the patient, including all prescribed medications and their costs.</li>
-                      <li>Pharmacy Workflow: Allows pharmacists to quickly access a patient's prescription using their ID or phone number, ensuring accurate dispensing of medicines.
-
-</li>
-                    </ul>
-                  </div>
-                  <div>
-                    <h4 class="font-display font-semibold mb-2">Technical Highlights</h4>
-                    <ul class="list-disc pl-5 space-y-2 text-gray-600 dark:text-gray-300">
-                      <li>Database Management: Utilized XAMPP to manage the MySQL database, ensuring efficient and reliable data storage.</li>
-                      <li>Front-End Development: Developed a dynamic and responsive user interface using Apache NetBeans.</li>
-                      <li>JDBC for database connectivity</li>
-                      <li>Database Connectivity: Established a robust connection between the Java application and the MySQL database to facilitate seamless data flow.</li>
-                     
-                      <li>Modular Architecture: The system is divided into separate modules for nurses, doctors, and pharmacists, which simplifies maintenance and future enhancements.</li>
-                    </ul>
-                  </div>
-                </div>
-                <div class="mb-6">
-                  <h4 class="font-display font-semibold mb-2">Development Challenges</h4>
-                  <p class="text-gray-600 dark:text-gray-300">
-                    Throughout the project, I faced several key development hurdles. The main challenge was integrating the Java front-end with the MySQL database via XAMPP to ensure smooth data flow. Another significant task was creating a secure, role-based user authentication system to maintain data privacy and give nurses, doctors, and pharmacists appropriate access. Finally, I focused on solving the complex issue of data synchronization, ensuring that a doctor's digital prescription was instantly and accurately updated in the pharmacy's module to prevent delays or errors.
-                  </p>
-                </div>
-                <div>
-                  <h4 class="font-display font-semibold mb-2">Impact</h4>
-                  <p class="text-gray-600 dark:text-gray-300">
-                    This system significantly improves the traditional medical workflow by digitizing the prescription process. It boosts efficiency by reducing time spent on manual data entry and enhances patient safety by minimizing errors from handwritten prescriptions. The centralized database allows for better record-keeping and gives doctors quick access to patient history. Ultimately, the project provides a strong foundation for future features, like pharmacy inventory management or appointment scheduling.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Project 1 Case Study Modal -->
-        <div id="project1-case-study" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4 opacity-0 invisible transition-opacity duration-300">
-          <div class="bg-white dark:bg-gray-800 rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
-            <div class="p-6">
-              <div class="flex justify-between items-center mb-4">
-                <h3 class="text-2xl font-display font-bold">Medical Prescription System - Case Study</h3>
-                <button class="close-modal text-gray-500 hover:text-gray-700 dark:hover:text-gray-300">
-                  <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                  </svg>
-                </button>
-              </div>
-              <div class="space-y-6">
-                <div>
-                  <h4 class="font-display font-semibold mb-2">Project Background</h4>
-                  <p class="text-gray-600 dark:text-gray-300">
-                    This project was developed to replace inefficient paper-based prescription systems. The goal was to create a simple digital platform that improves patient safety by eliminating errors from manual processes and provides a clear, centralized record of all prescriptions.
-                  </p>
-                </div>
-                <div>
-                  <h4 class="font-display font-semibold mb-2">Development Process</h4>
-                  <p class="text-gray-600 dark:text-gray-300">
-                    I used an incremental approach, starting with the database on XAMPP and then building the separate user interfaces for nurses, doctors, and pharmacists. This modular method allowed me to test each part as it was developed, ensuring the entire system worked seamlessly together.
-                  </p>
-                </div>
-                <div>
-                  <h4 class="font-display font-semibold mb-2">User Research</h4>
-                  <p class="text-gray-600 dark:text-gray-300">
-                    I conducted informal user research by analyzing the specific needs of each user role (nurse, doctor, pharmacist) to understand their workflow. This helped me design an intuitive system that directly addresses their pain points, making their tasks more efficient and reducing the potential for human error.
-                  </p>
-                </div>
-                <div>
-                  <h4 class="font-display font-semibold mb-2">Lessons Learned</h4>
-                  <p class="text-gray-600 dark:text-gray-300">
-                    A key lesson was the importance of proper database design as a foundation for a reliable application. The project also taught me the value of a modular approach to manage complexity and reinforced how software can effectively solve real-world problems in vital fields like healthcare.
-                  </p>
-                </div>
-                <div>
-                  <h4 class="font-display font-semibold mb-2">Future Enhancements</h4>
-                  <p class="text-gray-600 dark:text-gray-300">
-                    Planning to integrate with Sri Lanka's national health database and add AI-powered prescription suggestions based on patient history. 
-                    Also exploring a mobile version for doctors who make house calls.
-                  </p>
-                </div>
-              </div>
+            <div class="flex items-center space-x-4">
+              <a href="#" class="inline-flex items-center text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 transition-colors duration-300" data-modal-target="project1-case-study">
+                <span>View Case Study</span>
+                <i class="fas fa-arrow-right ml-2"></i>
+              </a>
+              <a href="https://github.com/arunadarshana17617-sketch/Medical_Prescription_System" target="_blank" class="github-btn-modern px-4 py-2 rounded-lg flex items-center">
+                <i class="fab fa-github github-icon w-4 h-4 mr-2"></i>
+                <span class="github-text">GitHub</span>
+              </a>
             </div>
           </div>
         </div>
@@ -812,7 +832,7 @@
               </div>
             </div>
             <div class="absolute inset-0 bg-primary-600/10 dark:bg-primary-400/10 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-              <a href="#project2-details" class="px-6 py-3 bg-primary-600 text-white rounded-full font-medium opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 flex items-center">
+              <a href="#" class="px-6 py-3 bg-primary-600 text-white rounded-full font-medium opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 flex items-center" data-modal-target="project2-details">
                 <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
@@ -834,7 +854,6 @@
     The project aims to include an online booking system, a comprehensive service catalog, and a gallery of client work.
             </p>
 
-
             <div class="flex flex-wrap gap-2 mb-4">
               <span class="px-3 py-1 bg-gray-100 dark:bg-gray-700 rounded-full text-xs font-mono">HTML5</span>
               <span class="px-3 py-1 bg-gray-100 dark:bg-gray-700 rounded-full text-xs font-mono">CSS3</span>
@@ -842,62 +861,10 @@
               <span class="px-3 py-1 bg-gray-100 dark:bg-gray-700 rounded-full text-xs font-mono">Responsive</span>
               <span class="px-3 py-1 bg-gray-100 dark:bg-gray-700 rounded-full text-xs font-mono">GSAP</span>
             </div>
-            <a href="https://saloon.html" target="_blank" class="inline-flex items-center text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 transition-colors duration-300">
-
-              <a href="saloon.html" style="color: #60a5fa;">Visit Live Site</a>
-              <!--<span>Visit Live Site</span>-->
+            <a href="saloon.html" style="color: #60a5fa;" class="inline-flex items-center text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 transition-colors duration-300">
+              Visit Live Site
               <i class="fas fa-arrow-right ml-2"></i>
             </a>
-          </div>
-        </div>
-        
-        <!-- Project 2 Details Modal -->
-        <div id="project2-details" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4 opacity-0 invisible transition-opacity duration-300">
-          <div class="bg-white dark:bg-gray-800 rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
-            <div class="p-6">
-              <div class="flex justify-between items-center mb-4">
-                <h3 class="text-2xl font-display font-bold">Salon Booking Website - Details</h3>
-                <button class="close-modal text-gray-500 hover:text-gray-700 dark:hover:text-gray-300">
-                  <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                  </svg>
-                </button>
-              </div>
-              <div class="space-y-4">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                  <div>
-                    <h4 class="font-display font-semibold mb-2">Key Features</h4>
-                    <ul class="list-disc pl-5 space-y-2 text-gray-600 dark:text-gray-300">
-                      <li>Easy Appointment Scheduling: Customers can easily view available time slots and book appointments in a few simple clicks.</li>
-                      <li>Service and Staff Information: The site provides detailed information about various services and the professionals who offer them.</li>
-                      <li>Responsive Design: The website is fully responsive, ensuring a seamless experience on both desktop and mobile devices.</li>
-                     
-                    </ul>
-                  </div>
-                  <div>
-                    <h4 class="font-display font-semibold mb-2">Technical Highlights</h4>
-                    <ul class="list-disc pl-5 space-y-2 text-gray-600 dark:text-gray-300">
-                      <li>HTML5 & CSS3: The user interface is built using modern HTML5 and CSS3 standards, including advanced Live CSS techniques for dynamic styling.</li>
-                      <li>JavaScript: JavaScript is utilized for interactive elements, form validation, and enhancing overall user experience.</li>
-                      <li>UI/UX Design: The focus was on creating a clean, intuitive, and visually appealing interface to ensure a smooth user journey.</li>
-                      
-                    </ul>
-                  </div>
-                </div>
-                <div class="mb-6">
-                  <h4 class="font-display font-semibold mb-2">Development Challenges</h4>
-                  <p class="text-gray-600 dark:text-gray-300">
-                   A major challenge was making sure the website worked perfectly across different web browsers. We had to do a lot of testing to ensure the Live CSS and JavaScript features looked and functioned the same everywhere. Another key task was designing a responsive layout that would adapt smoothly to all screen sizes, from desktop computers to mobile phones, ensuring a consistent user experience.
-                  </p>
-                </div>
-                <div>
-                  <h4 class="font-display font-semibold mb-2">Impact</h4>
-                  <p class="text-gray-600 dark:text-gray-300">
-                    This website has significantly improved the salon's efficiency by moving the booking process online. It has replaced the old, manual system, saving a lot of time for both customers and staff. This new, modern platform offers a better customer experience and is expected to attract new clients. Ultimately, this will help the salon grow and stay competitive in the market.
-                  </p>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
         
@@ -913,7 +880,7 @@
       </div>
     </div>
     <div class="absolute inset-0 bg-primary-600/10 dark:bg-primary-400/10 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-      <a href="#project3-details" class="px-6 py-3 bg-primary-600 text-white rounded-full font-medium opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 flex items-center">
+      <a href="#" class="px-6 py-3 bg-primary-600 text-white rounded-full font-medium opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 flex items-center" data-modal-target="project3-details">
         <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
@@ -940,135 +907,47 @@
       <span class="px-3 py-1 bg-gray-100 dark:bg-gray-700 rounded-full text-xs font-mono">JDBC</span>
       <span class="px-3 py-1 bg-gray-100 dark:bg-gray-700 rounded-full text-xs font-mono">Encryption</span>
     </div>
-    <a href="#project3-demo" class="inline-flex items-center text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 transition-colors duration-300">
-      <span>View Case Study</span>
-      <i class="fas fa-arrow-right ml-2"></i>
-    </a>
-  </div>
-</div>
-
-<div id="project1-details" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4 opacity-0 invisible transition-opacity duration-300">
-  
-</div>
-
-
-
-<div id="project3-details" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4 opacity-0 invisible transition-opacity duration-300">
-  <div class="bg-white dark:bg-gray-800 rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
-    <div class="p-6">
-      <div class="flex justify-between items-center mb-4">
-        <h3 class="text-2xl font-display font-bold">SuperMarket Billing System - Details</h3>
-        <button class="close-modal text-gray-500 hover:text-gray-700 dark:hover:text-gray-300">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-          </svg>
-        </button>
-      </div>
-      <div class="space-y-4">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-          <div>
-            <h4 class="font-display font-semibold mb-2">Key Features</h4>
-            <ul class="list-disc pl-5 space-y-2 text-gray-600 dark:text-gray-300">
-              <li>Streamlined Inventory Management: Manage products, stock levels, and pricing with a simple, integrated system.</li>
-              <li>Automated Barcode Generation: The system automatically creates a unique barcode for every new product, making billing fast and accurate.
-
-</li>
-              <li>Efficient Barcode-Based Billing: Customers' bills are generated quickly and accurately by scanning product barcodes at checkout.</li>
-              <li>Flexible Discount System: Easily apply time-limited discounts to any product, allowing for special promotions and offers.</li>
-              <li>Secure and Reliable Data Storage: All inventory and sales data are securely stored and managed using a MySQL database.
-
-</li>
-              <li>Comprehensive Daily Sales Reports: Gain valuable insights into business performance with detailed reports on daily sales and popular products.</li>
-            </ul>
-          </div>
-          <div>
-            <h4 class="font-display font-semibold mb-2">Technical Highlights</h4>
-            <ul class="list-disc pl-5 space-y-2 text-gray-600 dark:text-gray-300">
-              <li>Frontend: Developed using Java with the Apache NetBeans IDE to provide a user-friendly graphical interface.</li>
-              <li>Backend: Uses MySQL as the database to store and manage all data securely.</li>
-              <li>Database Connectivity: A robust connection was established using XAMPP to ensure smooth data flow between the application and the database.
-
-</li>
-             
-            </ul>
-          </div>
-        </div>
-        <div class="mb-6">
-          <h4 class="font-display font-semibold mb-2">Development Challenges</h4>
-          <p class="text-gray-600 dark:text-gray-300">
-            The project's key challenges centered on barcode generation and system integration. We needed to create unique, functional barcodes for every product and seamlessly integrate them into the billing system. Ensuring real-time data synchronization across all modules—inventory, billing, and reporting—was crucial for maintaining accuracy. The final hurdle was designing a user-friendly interface that was both intuitive and efficient for staff.
-          </p>
-        </div>
-        <div>
-          <h4 class="font-display font-semibold mb-2">Impact</h4>
-          <p class="text-gray-600 dark:text-gray-300">
-           This system significantly boosts operational efficiency by reducing manual work, which results in faster billing and fewer errors. This improved accuracy leads to a better customer experience with quicker checkout times and reliable service. Furthermore, the detailed daily reports provide business owners with valuable insights into their sales and inventory, enabling them to make smarter, data-driven decisions.
-          </p>
-        </div>
-      </div>
+    <div class="flex items-center space-x-4">
+      <a href="#" class="inline-flex items-center text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 transition-colors duration-300" data-modal-target="project3-demo">
+        <span>View Case Study</span>
+        <i class="fas fa-arrow-right ml-2"></i>
+      </a>
+      <a href="https://github.com/arunadarshana17617-sketch/Java-Bill-System" target="_blank" class="github-btn-modern px-4 py-2 rounded-lg flex items-center">
+        <i class="fab fa-github github-icon w-4 h-4 mr-2"></i>
+        <span class="github-text">GitHub</span>
+      </a>
     </div>
   </div>
 </div>
 
-
-
-
-
-
-
-
-       
-        
-        <!-- Project 3 Demo Modal -->
-        <div id="project3-demo" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4 opacity-0 invisible transition-opacity duration-300">
-          <div class="bg-white dark:bg-gray-800 rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
-            <div class="p-6">
-              <div class="flex justify-between items-center mb-4">
-                <h3 class="text-2xl font-display font-bold">SuperMarket Billing System - Case Study</h3>
-                <button class="close-modal text-gray-500 hover:text-gray-700 dark:hover:text-gray-300">
-                  <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                  </svg>
-                </button>
-              </div>
-             
-              <div class="space-y-6">
-                <div>
-                  <h4 class="font-display font-semibold mb-2">Project Background</h4>
-                  <p class="text-gray-600 dark:text-gray-300">
-                    The goal was to create a modern and efficient supermarket billing system. We focused on solving problems like slow checkouts and manual stock tracking, which can cause mistakes and make customers unhappy. Our final solution is designed to be easy to use, making the process faster and more accurate for everyone.
-
-
-                  </p>
-                </div>
-                <div>
-                  <h4 class="font-display font-semibold mb-2">Development Process</h4>
-                  <p class="text-gray-600 dark:text-gray-300">
-                   We began by planning the project's structure. Java was chosen for the visual part (the GUI) because it's reliable, and MySQL was selected for the database to store all the information securely. The project was built with the Apache NetBeans IDE, and we used XAMPP to connect to our database. We developed the features in stages, starting with inventory management and then building the billing and reporting functions.
-                  </p>
-                </div>
-                <div>
-                  <h4 class="font-display font-semibold mb-2">User Research</h4>
-                  <p class="text-gray-600 dark:text-gray-300">
-                   During our research, we watched how existing billing systems work and talked to both supermarket staff and customers. Employees told us they needed a faster way to handle sales and track stock. Customers were frustrated with long lines and billing errors. This valuable feedback helped us build a system that directly fixes these issues.
-                  </p>
-                </div>
-                <div>
-                  <h4 class="font-display font-semibold mb-2">Lessons Learned</h4>
-                  <p class="text-gray-600 dark:text-gray-300">
-                    A key lesson was how important real-time data synchronization is. Making sure that our inventory, billing, and reports were all updated instantly was a significant technical challenge. We also learned that a well-designed, simple user interface is crucial. An easy-to-use layout meant that staff could learn the system quickly and make fewer mistakes.
-                  </p>
-                </div>
-                <div>
-                  <h4 class="font-display font-semibold mb-2">Future Enhancements</h4>
-                  <p class="text-gray-600 dark:text-gray-300">
-                   We have a few ideas for future updates. We plan to add different user roles so managers can control what each employee can access. A customer loyalty program is also on our list to reward regular shoppers. Lastly, we want to create a mobile app for inventory so staff can update stock right from the store floor.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
+         <!-- All Projects Button -->
+        <div class="text-center mt-16">
+          <a href="proje.html" class="group relative inline-flex items-center justify-center px-10 py-5 text-lg font-display font-semibold text-white overflow-hidden rounded-2xl transition-all duration-500 ease-out hover:scale-105 hover:shadow-2xl active:scale-95">
+            <!-- Gradient background -->
+            <span class="absolute inset-0 bg-gradient-to-r from-primary-500 via-primary-600 to-primary-700"></span>
+            
+            <!-- Shine effect -->
+            <span class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></span>
+            
+            <!-- Animated border -->
+            <span class="absolute inset-0 rounded-2xl p-[2px]">
+              <span class="absolute inset-0 rounded-2xl bg-gradient-to-r from-primary-400 via-primary-500 to-primary-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></span>
+            </span>
+            
+            <!-- Button content -->
+            <span class="relative z-10 flex items-center">
+              <span class="mr-3">View All Projects</span>
+              <svg class="w-5 h-5 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </span>
+            
+            <!-- Pulse animation -->
+            <span class="absolute inset-0 rounded-2xl bg-white/20 animate-pulse opacity-0 group-hover:opacity-100 transition-opacity duration-500"></span>
+          </a>
         </div>
+      </div>
+    </div>
   </section>
 
   <!-- Experience Section -->
@@ -1087,7 +966,6 @@
       
       <div class="max-w-3xl mx-auto">
         
-
        <!-- Timeline item -->
 <div class="relative pl-8 sm:pl-32 py-6 group">
   <div class="font-display font-medium text-lg text-primary-600 dark:text-primary-400 mb-1 sm:mb-0">IT Student (Open University of Sri Lanka)</div>
@@ -1118,7 +996,6 @@
     <p>Gained foundational knowledge and practical skills in Information Technology through the Higher National Diploma in IT (HNDIT) at SLIATE. This program provided a strong base in various areas, including computer fundamentals, software development, networking, and web technologies.</p>
     <ul class="mt-5 list-disc pl-5 space-y-2">
       <li class="[word-spacing:0.05rem]">Graduated with First Class Honors, demonstrating exceptional academic performance.
-
 </li>
       <li class="[word-spacing:0.05rem]">Comprehensive Coursework: Gained in-depth knowledge and practical skills in algorithms, data structures, database systems, and human-computer interaction.</li>
       <li class="[word-spacing:0.05rem]">Technical Proficiency: Developed strong expertise in core programming languages including HTML, Java, C#, and PHP.</li>
@@ -1130,8 +1007,7 @@
 </div>
   </section>
   
-  
- <!-- Contact Section -->
+  <!-- Contact Section -->
   <section id="contact" class="py-20 bg-gray-50 dark:bg-gray-900 relative overflow-hidden">
     <div class="absolute inset-0 gradient-bg opacity-10 -z-10 animate-gradient"></div>
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -1218,28 +1094,45 @@
             </div>
           </div>
           
-          <div class="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-md glass">
-            <h3 class="text-2xl font-display font-semibold mb-6">Follow Me</h3>
-            <div class="flex space-x-4">
-              <a href="https://www.facebook.com/share/15svxYNzd3/" class="w-12 h-12 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center text-gray-700 dark:text-gray-300 hover:bg-primary-100 dark:hover:bg-gray-600 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
-    <img src="free-facebook-icon-52221-thumb.png" alt="Facebook Icon" class="h-full w-full object-contain">
-</a>
-                <i class="fab fa-github text-xl"></i>
-              </a>
-             <a href="https://www.instagram.com/aruna_ekanayake" class="w-12 h-12 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center text-gray-700 dark:text-gray-300 hover:bg-primary-100 dark:hover:bg-gray-600 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
-    <img src="imagess.jpg" alt="Facebook Icon" class="h-full w-full object-contain">
-</a>
-                <i class="fab fa-linkedin-in text-xl"></i>
-              <a href="https://youtube.com/@mister-chess?si=Xcn6Q9x2Isq7O9uP" class="w-12 h-12 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center text-gray-700 dark:text-gray-300 hover:bg-primary-100 dark:hover:bg-gray-600 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
-    <img src="Youtube_logo.png" alt="Facebook Icon" class="h-full w-full object-contain">
-</a>
-             
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+         <div class="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-md glass">
+  <h3 class="text-2xl font-display font-semibold mb-6">Follow Me</h3>
+  <div class="flex space-x-4">
+    <!-- Facebook -->
+    <a href="https://www.facebook.com/share/15svxYNzd3/" class="w-12 h-12 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center text-gray-700 dark:text-gray-300 hover:bg-blue-100 dark:hover:bg-blue-900 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+      </svg>
+    </a>
+    
+    <!-- Instagram -->
+    <a href="https://www.instagram.com/aruna_ekanayaka_?igsh=amdzbHE3dzN2dXM4" class="w-12 h-12 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center text-gray-700 dark:text-gray-300 hover:bg-pink-100 dark:hover:bg-pink-900 hover:text-pink-600 dark:hover:text-pink-400 transition-colors">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+      </svg>
+    </a>
+    
+    <!-- YouTube -->
+    <a href="https://youtube.com/@mister-chess?si=Xcn6Q9x2Isq7O9uP" class="w-12 h-12 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center text-gray-700 dark:text-gray-300 hover:bg-red-100 dark:hover:bg-red-900 hover:text-red-600 dark:hover:text-red-400 transition-colors">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/>
+      </svg>
+    </a>
+    
+    <!-- LinkedIn -->
+    <a href="https://www.linkedin.com/in/darshana-ekanayake-8a74ba387?utm_source=share_via&utm_content=profile&utm_medium=member_android" class="w-12 h-12 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center text-gray-700 dark:text-gray-300 hover:bg-blue-100 dark:hover:bg-blue-900 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+      </svg>
+    </a>
+    
+    <!-- GitHub -->
+    <a href="https://github.com/arunadarshana17617-sketch" class="w-12 h-12 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 hover:text-gray-900 dark:hover:text-white transition-colors">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+      </svg>
+    </a>
+  </div>
+</div>
   </section>
   
   <!-- Footer -->
@@ -1273,6 +1166,7 @@
             <li><a href="#projects" class="text-gray-400 hover:text-white transition-colors">Projects</a></li>
             <li><a href="#experience" class="text-gray-400 hover:text-white transition-colors">Education</a></li>
             <li><a href="#contact" class="text-gray-400 hover:text-white transition-colors">Contact</a></li>
+            <li><a href="vlog.html" class="text-gray-400 hover:text-white transition-colors">Blog</a></li> 
           </ul>
         </div>
         <div>
@@ -1304,282 +1198,508 @@
     </svg>
   </button>
   
+  <!-- Project Modals -->
+  
+  <!-- Project 1 Details Modal -->
+  <div id="project1-details" class="modal">
+    <div class="modal-content">
+      <button class="modal-close">&times;</button>
+      <div class="p-6">
+        <div class="flex justify-between items-center mb-4">
+          <h3 class="text-2xl font-display font-bold">Medical Prescription System - Details</h3>
+        </div>
+        <div class="space-y-4">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+            <div>
+              <h4 class="font-display font-semibold mb-2">Key Features</h4>
+              <ul class="list-disc pl-5 space-y-2 text-gray-600 dark:text-gray-300">
+                <li>User-Friendly Interface: The system provides separate, easy-to-use interfaces for nurses, doctors, and pharmacists.</li>
+                <li>Patient Data Management: Securely stores and retrieves patient information using a unique ID or hospital number.</li>
+                <li>Digital Prescription Module: Doctors can digitally prescribe medication, which is then automatically sent to the pharmacy module.</li>
+                <li>Prescription History: Maintains a clear record of past prescriptions for each patient, enabling doctors to make informed decisions.</li>
+                <li>Automated Billing: Generates a detailed bill for the patient, including all prescribed medications and their costs.</li>
+                <li>Pharmacy Workflow: Allows pharmacists to quickly access a patient's prescription using their ID or phone number, ensuring accurate dispensing of medicines.</li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="font-display font-semibold mb-2">Technical Highlights</h4>
+              <ul class="list-disc pl-5 space-y-2 text-gray-600 dark:text-gray-300">
+                <li>Database Management: Utilized XAMPP to manage the MySQL database, ensuring efficient and reliable data storage.</li>
+                <li>Front-End Development: Developed a dynamic and responsive user interface using Apache NetBeans.</li>
+                <li>JDBC for database connectivity</li>
+                <li>Database Connectivity: Established a robust connection between the Java application and the MySQL database to facilitate seamless data flow.</li>
+                <li>Modular Architecture: The system is divided into separate modules for nurses, doctors, and pharmacists, which simplifies maintenance and future enhancements.</li>
+              </ul>
+            </div>
+          </div>
+          <div class="mb-6">
+            <h4 class="font-display font-semibold mb-2">Development Challenges</h4>
+            <p class="text-gray-600 dark:text-gray-300">
+              Throughout the project, I faced several key development hurdles. The main challenge was integrating the Java front-end with the MySQL database via XAMPP to ensure smooth data flow. Another significant task was creating a secure, role-based user authentication system to maintain data privacy and give nurses, doctors, and pharmacists appropriate access. Finally, I focused on solving the complex issue of data synchronization, ensuring that a doctor's digital prescription was instantly and accurately updated in the pharmacy's module to prevent delays or errors.
+            </p>
+          </div>
+          <div>
+            <h4 class="font-display font-semibold mb-2">Impact</h4>
+            <p class="text-gray-600 dark:text-gray-300">
+              This system significantly improves the traditional medical workflow by digitizing the prescription process. It boosts efficiency by reducing time spent on manual data entry and enhances patient safety by minimizing errors from handwritten prescriptions. The centralized database allows for better record-keeping and gives doctors quick access to patient history. Ultimately, the project provides a strong foundation for future features, like pharmacy inventory management or appointment scheduling.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Project 1 Case Study Modal -->
+  <div id="project1-case-study" class="modal">
+    <div class="modal-content">
+      <button class="modal-close">&times;</button>
+      <div class="p-6">
+        <div class="flex justify-between items-center mb-4">
+          <h3 class="text-2xl font-display font-bold">Medical Prescription System - Case Study</h3>
+        </div>
+        <div class="space-y-6">
+          <div>
+            <h4 class="font-display font-semibold mb-2">Project Background</h4>
+            <p class="text-gray-600 dark:text-gray-300">
+              This project was developed to replace inefficient paper-based prescription systems. The goal was to create a simple digital platform that improves patient safety by eliminating errors from manual processes and provides a clear, centralized record of all prescriptions.
+            </p>
+          </div>
+          <div>
+            <h4 class="font-display font-semibold mb-2">Development Process</h4>
+            <p class="text-gray-600 dark:text-gray-300">
+              I used an incremental approach, starting with the database on XAMPP and then building the separate user interfaces for nurses, doctors, and pharmacists. This modular method allowed me to test each part as it was developed, ensuring the entire system worked seamlessly together.
+            </p>
+          </div>
+          <div>
+            <h4 class="font-display font-semibold mb-2">User Research</h4>
+            <p class="text-gray-600 dark:text-gray-300">
+              I conducted informal user research by analyzing the specific needs of each user role (nurse, doctor, pharmacist) to understand their workflow. This helped me design an intuitive system that directly addresses their pain points, making their tasks more efficient and reducing the potential for human error.
+            </p>
+          </div>
+          <div>
+            <h4 class="font-display font-semibold mb-2">Lessons Learned</h4>
+            <p class="text-gray-600 dark:text-gray-300">
+              A key lesson was the importance of proper database design as a foundation for a reliable application. The project also taught me the value of a modular approach to manage complexity and reinforced how software can effectively solve real-world problems in vital fields like healthcare.
+            </p>
+          </div>
+          <div>
+            <h4 class="font-display font-semibold mb-2">Future Enhancements</h4>
+            <p class="text-gray-600 dark:text-gray-300">
+              Planning to integrate with Sri Lanka's national health database and add AI-powered prescription suggestions based on patient history. 
+              Also exploring a mobile version for doctors who make house calls.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Project 2 Details Modal -->
+  <div id="project2-details" class="modal">
+    <div class="modal-content">
+      <button class="modal-close">&times;</button>
+      <div class="p-6">
+        <div class="flex justify-between items-center mb-4">
+          <h3 class="text-2xl font-display font-bold">Salon Booking Website - Details</h3>
+        </div>
+        <div class="space-y-4">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+            <div>
+              <h4 class="font-display font-semibold mb-2">Key Features</h4>
+              <ul class="list-disc pl-5 space-y-2 text-gray-600 dark:text-gray-300">
+                <li>Easy Appointment Scheduling: Customers can easily view available time slots and book appointments in a few simple clicks.</li>
+                <li>Service and Staff Information: The site provides detailed information about various services and the professionals who offer them.</li>
+                <li>Responsive Design: The website is fully responsive, ensuring a seamless experience on both desktop and mobile devices.</li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="font-display font-semibold mb-2">Technical Highlights</h4>
+              <ul class="list-disc pl-5 space-y-2 text-gray-600 dark:text-gray-300">
+                <li>HTML5 & CSS3: The user interface is built using modern HTML5 and CSS3 standards, including advanced Live CSS techniques for dynamic styling.</li>
+                <li>JavaScript: JavaScript is utilized for interactive elements, form validation, and enhancing overall user experience.</li>
+              </ul>
+            </div>
+          </div>
+          <div class="mb-6">
+            <h4 class="font-display font-semibold mb-2">Development Challenges</h4>
+            <p class="text-gray-600 dark:text-gray-300">
+             A major challenge was making sure the website worked perfectly across different web browsers. We had to do a lot of testing to ensure the Live CSS and JavaScript features looked and functioned the same everywhere. Another key task was designing a responsive layout that would adapt smoothly to all screen sizes, from desktop computers to mobile phones, ensuring a consistent user experience.
+            </p>
+          </div>
+          <div>
+            <h4 class="font-display font-semibold mb-2">Impact</h4>
+            <p class="text-gray-600 dark:text-gray-300">
+              This website has significantly improved the salon's efficiency by moving the booking process online. It has replaced the old, manual system, saving a lot of time for both customers and staff. This new, modern platform offers a better customer experience and is expected to attract new clients. Ultimately, this will help the salon grow and stay competitive in the market.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Project 3 Details Modal -->
+  <div id="project3-details" class="modal">
+    <div class="modal-content">
+      <button class="modal-close">&times;</button>
+      <div class="p-6">
+        <div class="flex justify-between items-center mb-4">
+          <h3 class="text-2xl font-display font-bold">SuperMarket Billing System - Details</h3>
+        </div>
+        <div class="space-y-4">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+            <div>
+              <h4 class="font-display font-semibold mb-2">Key Features</h4>
+              <ul class="list-disc pl-5 space-y-2 text-gray-600 dark:text-gray-300">
+                <li>Streamlined Inventory Management: Manage products, stock levels, and pricing with a simple, integrated system.</li>
+                <li>Automated Barcode Generation: The system automatically creates a unique barcode for every new product, making billing fast and accurate.</li>
+                <li>Efficient Barcode-Based Billing: Customers' bills are generated quickly and accurately by scanning product barcodes at checkout.</li>
+                <li>Flexible Discount System: Easily apply time-limited discounts to any product, allowing for special promotions and offers.</li>
+                <li>Secure and Reliable Data Storage: All inventory and sales data are securely stored and managed using a MySQL database.</li>
+                <li>Comprehensive Daily Sales Reports: Gain valuable insights into business performance with detailed reports on daily sales and popular products.</li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="font-display font-semibold mb-2">Technical Highlights</h4>
+              <ul class="list-disc pl-5 space-y-2 text-gray-600 dark:text-gray-300">
+                <li>Frontend: Developed using Java with the Apache NetBeans IDE to provide a user-friendly graphical interface.</li>
+                <li>Backend: Uses MySQL as the database to store and manage all data securely.</li>
+                <li>Database Connectivity: A robust connection was established using XAMPP to ensure smooth data flow between the application and the database.</li>
+              </ul>
+            </div>
+          </div>
+          <div class="mb-6">
+            <h4 class="font-display font-semibold mb-2">Development Challenges</h4>
+            <p class="text-gray-600 dark:text-gray-300">
+              The project's key challenges centered on barcode generation and system integration. We needed to create unique, functional barcodes for every product and seamlessly integrate them into the billing system. Ensuring real-time data synchronization across all modules—inventory, billing, and reporting—was crucial for maintaining accuracy. The final hurdle was designing a user-friendly interface that was both intuitive and efficient for staff.
+            </p>
+          </div>
+          <div>
+            <h4 class="font-display font-semibold mb-2">Impact</h4>
+            <p class="text-gray-600 dark:text-gray-300">
+             This system significantly boosts operational efficiency by reducing manual work, which results in faster billing and fewer errors. This improved accuracy leads to a better customer experience with quicker checkout times and reliable service. Furthermore, the detailed daily reports provide business owners with valuable insights into their sales and inventory, enabling them to make smarter, data-driven decisions.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Project 3 Demo Modal -->
+  <div id="project3-demo" class="modal">
+    <div class="modal-content">
+      <button class="modal-close">&times;</button>
+      <div class="p-6">
+        <div class="flex justify-between items-center mb-4">
+          <h3 class="text-2xl font-display font-bold">SuperMarket Billing System - Case Study</h3>
+        </div>
+        <div class="space-y-6">
+          <div>
+            <h4 class="font-display font-semibold mb-2">Project Background</h4>
+            <p class="text-gray-600 dark:text-gray-300">
+              The goal was to create a modern and efficient supermarket billing system. We focused on solving problems like slow checkouts and manual stock tracking, which can cause mistakes and make customers unhappy. Our final solution is designed to be easy to use, making the process faster and more accurate for everyone.
+            </p>
+          </div>
+          <div>
+            <h4 class="font-display font-semibold mb-2">Development Process</h4>
+            <p class="text-gray-600 dark:text-gray-300">
+             We began by planning the project's structure. Java was chosen for the visual part (the GUI) because it's reliable, and MySQL was selected for the database to store all the information securely. The project was built with the Apache NetBeans IDE, and we used XAMPP to connect to our database. We developed the features in stages, starting with inventory management and then building the billing and reporting functions.
+            </p>
+          </div>
+          <div>
+            <h4 class="font-display font-semibold mb-2">User Research</h4>
+            <p class="text-gray-600 dark:text-gray-300">
+             During our research, we watched how existing billing systems work and talked to both supermarket staff and customers. Employees told us they needed a faster way to handle sales and track stock. Customers were frustrated with long lines and billing errors. This valuable feedback helped us build a system that directly fixes these issues.
+            </p>
+          </div>
+          <div>
+            <h4 class="font-display font-semibold mb-2">Lessons Learned</h4>
+            <p class="text-gray-600 dark:text-gray-300">
+              A key lesson was how important real-time data synchronization is. Making sure that our inventory, billing, and reports were all updated instantly was a significant technical challenge. We also learned that a well-designed, simple user interface is crucial. An easy-to-use layout meant that staff could learn the system quickly and make fewer mistakes.
+            </p>
+          </div>
+          <div>
+            <h4 class="font-display font-semibold mb-2">Future Enhancements</h4>
+            <p class="text-gray-600 dark:text-gray-300">
+             We have a few ideas for future updates. We plan to add different user roles so managers can control what each employee can access. A customer loyalty program is also on our list to reward regular shoppers. Lastly, we want to create a mobile app for inventory so staff can update stock right from the store floor.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
   <!-- JavaScript -->
- 
-<script>
+  <script>
     document.addEventListener('DOMContentLoaded', () => {
-
-        // --- Form Submission Functionality ---
-        const form = document.getElementById('contactForm');
-        const formStatus = document.getElementById('form-status') || document.getElementById('formStatus');
-
-        if (form) {
-            form.addEventListener('submit', async (e) => {
-                e.preventDefault();
-
-                const formData = new FormData(form);
-                const actionUrl = form.action.includes('formspree.io') ? form.action : 'sendmail.php';
-                
-                if (formStatus) {
-                    formStatus.innerHTML = '<p class="text-blue-600 font-bold">Sending message...</p>';
-                }
-
-                try {
-                    const response = await fetch(actionUrl, {
-                        method: 'POST',
-                        body: formData,
-                        headers: {
-                            'Accept': 'application/json'
-                        }
-                    });
-
-                    if (response.ok) {
-                        if (formStatus) {
-                            formStatus.innerHTML = '<p class="text-green-600 font-bold">Message has been sent successfully!</p>';
-                        }
-                        form.reset();
-                    } else {
-                        const data = await response.json();
-                        if (formStatus) {
-                            if (data && Object.hasOwn(data, 'errors')) {
-                                formStatus.innerHTML = `<p class="text-red-600 font-bold">Error: ${data.errors.map(error => error.message).join(', ')}</p>`;
-                            } else {
-                                formStatus.innerHTML = '<p class="text-red-600 font-bold">An unexpected error occurred. Please try again.</p>';
-                            }
-                        }
-                    }
-                } catch (error) {
-                    if (formStatus) {
-                        formStatus.innerHTML = '<p class="text-red-600 font-bold">An unexpected error occurred. Please try again.</p>';
-                    }
-                    console.error('Error:', error);
-                }
-            });
+      // Modal functionality
+      const modalTriggers = document.querySelectorAll('[data-modal-target]');
+      const modals = document.querySelectorAll('.modal');
+      const modalCloses = document.querySelectorAll('.modal-close');
+      
+      // Open modal
+      modalTriggers.forEach(trigger => {
+        trigger.addEventListener('click', (e) => {
+          e.preventDefault();
+          const targetId = trigger.getAttribute('data-modal-target');
+          const targetModal = document.getElementById(targetId);
+          if (targetModal) {
+            targetModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+          }
+        });
+      });
+      
+      // Close modal
+      modalCloses.forEach(close => {
+        close.addEventListener('click', () => {
+          const modal = close.closest('.modal');
+          if (modal) {
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+          }
+        });
+      });
+      
+      // Close modal when clicking outside
+      modals.forEach(modal => {
+        modal.addEventListener('click', (e) => {
+          if (e.target === modal) {
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+          }
+        });
+      });
+      
+      // Close modal with Escape key
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          modals.forEach(modal => {
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+          });
         }
+      });
 
-        // --- Mobile menu toggle ---
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
-        if (mobileMenuButton && mobileMenu) {
-            mobileMenuButton.addEventListener('click', () => {
-                mobileMenu.classList.toggle('hidden');
-            });
-        }
+      // --- Form Submission Functionality ---
+      const form = document.getElementById('contactForm');
+      const formStatus = document.getElementById('form-status') || document.getElementById('formStatus');
 
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-        const targetId = this.getAttribute('href');
-        
-        // Modal links (e.g., #project1, #project2) හැර අනෙක් සියලුම
-        // anchor links සඳහා smooth scrolling යොදන්න.
-        if (targetId.startsWith('#project')) {
-            // #projects කියන link එකට අමතරව #project1, #project2 වගේ links තියෙන නිසා
-            // මේකෙදි මම `#project` එක විතරක් තෝරගන්න කෝඩ් එක වෙනස් කළා.
-            if (targetId === '#projects') {
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    e.preventDefault();
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                    if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
-                        mobileMenu.classList.add('hidden');
-                    }
-                }
-            } else {
-                // #project1, #project2 වගේ modal links සඳහා default ක්‍රියාව නවත්වන්න
-                e.preventDefault();
-            }
-            return;
-        }
+      if (form) {
+          form.addEventListener('submit', async (e) => {
+              e.preventDefault();
 
-        const targetElement = document.querySelector(targetId);
-        if (targetElement) {
-            e.preventDefault();
-            window.scrollTo({
-                top: targetElement.offsetTop - 80,
-                behavior: 'smooth'
-            });
-            if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
-                mobileMenu.classList.add('hidden');
-            }
-        }
+              const formData = new FormData(form);
+              const actionUrl = form.action.includes('formspree.io') ? form.action : 'sendmail.php';
+              
+              if (formStatus) {
+                  formStatus.innerHTML = '<p class="text-blue-600 font-bold">Sending message...</p>';
+              }
+
+              try {
+                  const response = await fetch(actionUrl, {
+                      method: 'POST',
+                      body: formData,
+                      headers: {
+                          'Accept': 'application/json'
+                      }
+                  });
+
+                  if (response.ok) {
+                      if (formStatus) {
+                          formStatus.innerHTML = '<p class="text-green-600 font-bold">Message has been sent successfully!</p>';
+                      }
+                      form.reset();
+                  } else {
+                      const data = await response.json();
+                      if (formStatus) {
+                          if (data && Object.hasOwn(data, 'errors')) {
+                              formStatus.innerHTML = `<p class="text-red-600 font-bold">Error: ${data.errors.map(error => error.message).join(', ')}</p>`;
+                          } else {
+                              formStatus.innerHTML = '<p class="text-red-600 font-bold">An unexpected error occurred. Please try again.</p>';
+                          }
+                      }
+                  }
+              } catch (error) {
+                  if (formStatus) {
+                      formStatus.innerHTML = '<p class="text-red-600 font-bold">An unexpected error occurred. Please try again.</p>';
+                  }
+                  console.error('Error:', error);
+              }
+          });
+      }
+
+      // --- Mobile menu toggle ---
+      const mobileMenuButton = document.getElementById('mobile-menu-button');
+      const mobileMenu = document.getElementById('mobile-menu');
+      if (mobileMenuButton && mobileMenu) {
+          mobileMenuButton.addEventListener('click', () => {
+              mobileMenu.classList.toggle('hidden');
+          });
+      }
+
+      // --- Smooth scrolling for anchor links ---
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+          anchor.addEventListener('click', function(e) {
+              const targetId = this.getAttribute('href');
+              
+              // Check if it's a modal link
+              if (this.hasAttribute('data-modal-target')) {
+                  // Let the modal handling code handle these
+                  e.preventDefault();
+                  return;
+              }
+              
+              // Regular anchor link - handle smooth scrolling
+              const targetElement = document.querySelector(targetId);
+              if (targetElement) {
+                  e.preventDefault();
+                  window.scrollTo({
+                      top: targetElement.offsetTop - 80,
+                      behavior: 'smooth'
+                  });
+                  if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
+                      mobileMenu.classList.add('hidden');
+                  }
+              }
+          });
+      });
+
+      // --- Back to top button ---
+      const backToTopButton = document.getElementById('backToTop');
+      if (backToTopButton) {
+          window.addEventListener('scroll', () => {
+              if (window.pageYOffset > 300) {
+                  backToTopButton.classList.remove('opacity-0', 'invisible');
+                  backToTopButton.classList.add('opacity-100', 'visible');
+              } else {
+                  backToTopButton.classList.remove('opacity-100', 'visible');
+                  backToTopButton.classList.add('opacity-0', 'invisible');
+              }
+          });
+          backToTopButton.addEventListener('click', () => {
+              window.scrollTo({
+                  top: 0,
+                  behavior: 'smooth'
+              });
+          });
+      }
+
+      // --- Typed.js animation ---
+      if (typeof Typed !== 'undefined') {
+          new Typed('#typed', {
+              strings: [
+                  'Creative Developer & UI/UX Specialist',
+                  'Java System Developer',
+                  'Web Designer',
+                  'AI Enthusiast',
+                  'Chess Player'
+              ],
+              typeSpeed: 50,
+              backSpeed: 30,
+              backDelay: 1500,
+              loop: true,
+              showCursor: true,
+              cursorChar: '|',
+              autoInsertCss: true
+          });
+      }
+
+      // --- GSAP animations (Assuming GSAP is included) ---
+      if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+          gsap.registerPlugin(ScrollTrigger);
+
+          gsap.utils.toArray('section').forEach(section => {
+              gsap.from(section, {
+                  scrollTrigger: {
+                      trigger: section,
+                      start: 'top 80%',
+                      toggleActions: 'play none none none'
+                  },
+                  opacity: 0,
+                  y: 50,
+                  duration: 1
+              });
+          });
+
+          gsap.utils.toArray('.card-hover').forEach(card => {
+              gsap.from(card, {
+                  scrollTrigger: {
+                      trigger: card,
+                      start: 'top 80%',
+                      toggleActions: 'play none none none'
+                  },
+                  opacity: 0,
+                  y: 30,
+                  duration: 0.8,
+                  stagger: 0.1
+              });
+          });
+
+          gsap.to('.blob', {
+              scrollTrigger: {
+                  trigger: '#about',
+                  start: 'top bottom',
+                  scrub: true
+              },
+              scale: 0.9,
+              y: 50,
+              duration: 1
+          });
+
+          gsap.to('.gradient-text', {
+              duration: 10,
+              backgroundPosition: '100% 50%',
+              repeat: -1,
+              ease: 'none'
+          });
+      }
+
+      // --- Dark mode toggle functionality ---
+      const themeToggle = document.getElementById('theme-toggle');
+      const themeToggleMobile = document.getElementById('theme-toggle-mobile');
+      const themeIconLight = document.getElementById('theme-icon-light');
+      const themeIconDark = document.getElementById('theme-icon-dark');
+      const themeIconLightMobile = document.getElementById('theme-icon-light-mobile');
+      const themeIconDarkMobile = document.getElementById('theme-icon-dark-mobile');
+
+      const currentTheme = localStorage.getItem('theme') ||
+          (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+
+      if (currentTheme === 'dark') {
+          document.documentElement.classList.add('dark');
+      }
+
+      function updateThemeIcons(isDarkMode) {
+          if (isDarkMode) {
+              if (themeIconLight) themeIconLight.classList.add('hidden');
+              if (themeIconDark) themeIconDark.classList.remove('hidden');
+              if (themeIconLightMobile) themeIconLightMobile.classList.add('hidden');
+              if (themeIconDarkMobile) themeIconDarkMobile.classList.remove('hidden');
+          } else {
+              if (themeIconLight) themeIconLight.classList.remove('hidden');
+              if (themeIconDark) themeIconDark.classList.add('hidden');
+              if (themeIconLightMobile) themeIconLightMobile.classList.remove('hidden');
+              if (themeIconDarkMobile) themeIconDarkMobile.classList.add('hidden');
+          }
+      }
+
+      updateThemeIcons(currentTheme === 'dark');
+
+      function toggleTheme() {
+          if (document.documentElement.classList.contains('dark')) {
+              document.documentElement.classList.remove('dark');
+              localStorage.setItem('theme', 'light');
+              updateThemeIcons(false);
+          } else {
+              document.documentElement.classList.add('dark');
+              localStorage.setItem('theme', 'dark');
+              updateThemeIcons(true);
+          }
+      }
+
+      if (themeToggle) themeToggle.addEventListener('click', toggleTheme);
+      if (themeToggleMobile) themeToggleMobile.addEventListener('click', toggleTheme);
     });
-});
-
-        // --- Back to top button ---
-        const backToTopButton = document.getElementById('backToTop');
-        if (backToTopButton) {
-            window.addEventListener('scroll', () => {
-                if (window.pageYOffset > 300) {
-                    backToTopButton.classList.remove('opacity-0', 'invisible');
-                    backToTopButton.classList.add('opacity-100', 'visible');
-                } else {
-                    backToTopButton.classList.remove('opacity-100', 'visible');
-                    backToTopButton.classList.add('opacity-0', 'invisible');
-                }
-            });
-            backToTopButton.addEventListener('click', () => {
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
-                });
-            });
-        }
-
-        // --- Typed.js animation ---
-        if (typeof Typed !== 'undefined') {
-            new Typed('#typed', {
-                strings: [
-                    'Creative Developer & UI/UX Specialist',
-                    'Java System Developer',
-                    'Web Designer',
-                    'AI Enthusiast',
-                    'Chess Player'
-                ],
-                typeSpeed: 50,
-                backSpeed: 30,
-                backDelay: 1500,
-                loop: true,
-                showCursor: true,
-                cursorChar: '|',
-                autoInsertCss: true
-            });
-        }
-
-        // --- Modal functionality ---
-        const openModalButtons = document.querySelectorAll('a[href^="#project"]');
-        const closeModalButtons = document.querySelectorAll('.close-modal');
-        const modals = document.querySelectorAll('.fixed');
-
-        openModalButtons.forEach(button => {
-            button.addEventListener('click', function(e) {
-                e.preventDefault();
-                const targetModalId = this.getAttribute('href');
-                const modal = document.querySelector(targetModalId);
-                if (modal) {
-                    modal.classList.remove('invisible', 'opacity-0');
-                    modal.classList.add('visible', 'opacity-100');
-                }
-            });
-        });
-
-        closeModalButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                const modal = this.closest('.fixed');
-                if (modal) {
-                    modal.classList.remove('visible', 'opacity-100');
-                    modal.classList.add('invisible', 'opacity-0');
-                }
-            });
-        });
-        
-        modals.forEach(modal => {
-            modal.addEventListener('click', function(e) {
-                if (e.target === this) {
-                    this.classList.remove('visible', 'opacity-100');
-                    this.classList.add('invisible', 'opacity-0');
-                }
-            });
-        });
-
-        // --- GSAP animations (Assuming GSAP is included) ---
-        if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
-            gsap.registerPlugin(ScrollTrigger);
-
-            gsap.utils.toArray('section').forEach(section => {
-                gsap.from(section, {
-                    scrollTrigger: {
-                        trigger: section,
-                        start: 'top 80%',
-                        toggleActions: 'play none none none'
-                    },
-                    opacity: 0,
-                    y: 50,
-                    duration: 1
-                });
-            });
-
-            gsap.utils.toArray('.card-hover').forEach(card => {
-                gsap.from(card, {
-                    scrollTrigger: {
-                        trigger: card,
-                        start: 'top 80%',
-                        toggleActions: 'play none none none'
-                    },
-                    opacity: 0,
-                    y: 30,
-                    duration: 0.8,
-                    stagger: 0.1
-                });
-            });
-
-            gsap.to('.blob', {
-                scrollTrigger: {
-                    trigger: '#about',
-                    start: 'top bottom',
-                    scrub: true
-                },
-                scale: 0.9,
-                y: 50,
-                duration: 1
-            });
-
-            gsap.to('.gradient-text', {
-                duration: 10,
-                backgroundPosition: '100% 50%',
-                repeat: -1,
-                ease: 'none'
-            });
-        }
-
-        // --- Dark mode toggle functionality ---
-        const themeToggle = document.getElementById('theme-toggle');
-        const themeToggleMobile = document.getElementById('theme-toggle-mobile');
-        const themeIconLight = document.getElementById('theme-icon-light');
-        const themeIconDark = document.getElementById('theme-icon-dark');
-        const themeIconLightMobile = document.getElementById('theme-icon-light-mobile');
-        const themeIconDarkMobile = document.getElementById('theme-icon-dark-mobile');
-
-        const currentTheme = localStorage.getItem('theme') ||
-            (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-
-        if (currentTheme === 'dark') {
-            document.documentElement.classList.add('dark');
-        }
-
-        function updateThemeIcons(isDarkMode) {
-            if (isDarkMode) {
-                if (themeIconLight) themeIconLight.classList.add('hidden');
-                if (themeIconDark) themeIconDark.classList.remove('hidden');
-                if (themeIconLightMobile) themeIconLightMobile.classList.add('hidden');
-                if (themeIconDarkMobile) themeIconDarkMobile.classList.remove('hidden');
-            } else {
-                if (themeIconLight) themeIconLight.classList.remove('hidden');
-                if (themeIconDark) themeIconDark.classList.add('hidden');
-                if (themeIconLightMobile) themeIconLightMobile.classList.remove('hidden');
-                if (themeIconDarkMobile) themeIconDarkMobile.classList.add('hidden');
-            }
-        }
-
-        updateThemeIcons(currentTheme === 'dark');
-
-        function toggleTheme() {
-            if (document.documentElement.classList.contains('dark')) {
-                document.documentElement.classList.remove('dark');
-                localStorage.setItem('theme', 'light');
-                updateThemeIcons(false);
-            } else {
-                document.documentElement.classList.add('dark');
-                localStorage.setItem('theme', 'dark');
-                updateThemeIcons(true);
-            }
-        }
-
-        if (themeToggle) themeToggle.addEventListener('click', toggleTheme);
-        if (themeToggleMobile) themeToggleMobile.addEventListener('click', toggleTheme);
-    });
-</script>
+  </script>
 </body>
 </html>
